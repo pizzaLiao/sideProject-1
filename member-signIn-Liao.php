@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -35,23 +38,42 @@
 					<li class="nav-item flex-growth"><a class="nav-link" href="">會員登入</a></li>
 				</ul>
 			</nav>
-			<form class="sign-in-panel">
+			
+			<?php if (isset($_SESSION["error"]["times"]) && $_SESSION["error"]["times"] > 5) : ?>
 				<div class="logo">
-					<img class="object-fit-contain" src="https://cdn.dribbble.com/users/973433/screenshots/5422715/media/41af115b3049cc12fbbf2dfd9c7596ce.jpg?compress=1&resize=1600x1200&vertical=center" alt="">
+					<img class="object-fit-contain" src="https://cdn-bastani.stunning.kr/prod/portfolios/2e57fdd0-63cf-4f59-9445-d034c4fcf4a6/contents/84b9a3627bf92ae75527c680642ac1e51d3b349b2f7fd9e55b7f7b38871181b7_v2.gif" alt="">
 				</div>
-				<div class="form-group mb-2">
-					<label for="account" class="form-label">帳號</label>
-					<input type="account" class="form-control" id="account" placeholder="example@mail.com">
-				</div>
-				<div class="form-group mb-2">
-					<label for="password" class="form-label">密碼</label>
-					<input type="password" class="form-control" id="password" placeholder="6-18位數密碼，區分大小寫">
-				</div>
-				<div class="text-danger">錯誤資料提示文字放在這邊</div>
 				<div class="d-flex justify-content-center">
-					<button class="mt-3 btn btn-dark" type="button">登入</button>
+					<h4 class="h6">錯誤次數太多了，等等再試</h4>
 				</div>
-			</form>
+
+			<?php else : ?>
+				<form action="do-sign-in-Liao.php" method="post" class="sign-in-panel">
+
+					<div class="logo">
+						<img class="object-fit-contain" src="https://cdn.dribbble.com/users/17243/screenshots/11643378/media/09c00588d9a7cef3dedd09b528c6de9f.png?compress=1&resize=1600x1200&vertical=center" alt="">
+					</div>
+
+
+					<div class="form-group mb-2">
+						<label for="account" class="form-label">帳號</label>
+						<input name="account" type="account" class="form-control" id="account" placeholder="example@mail.com">
+					</div>
+					<div class="form-group mb-2">
+						<label for="password" class="form-label">密碼</label>
+						<input name="password" type="password" class="form-control" id="password" placeholder="請自行設定密碼">
+					</div>
+					<?php if (isset($_SESSION["error"])) : ?>
+						<div class="text-danger">
+							<?= $_SESSION["error"]["message"]; ?>
+						</div>
+					<?php unset($_SESSION["error"]["message"]);
+					endif;  ?>
+					<div class="d-flex justify-content-center">
+						<button class="mt-3 btn btn-dark" type="submit">登入</button>
+					</div>
+				</form>
+			<?php endif; ?>
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

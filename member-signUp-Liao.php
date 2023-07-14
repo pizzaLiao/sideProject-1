@@ -1,14 +1,5 @@
 <?php
-
-if (isset($_GET["step"])) {
-	$step = $_GET["step"];
-} else {
-	$step = 1;
-}
-
-if ($step == 1) {
-}
-
+session_start();
 ?>
 
 
@@ -42,6 +33,13 @@ if ($step == 1) {
 </head>
 
 <body>
+	<!-- 已經被註冊過的提示訊息 -->
+
+
+
+
+
+
 	<div class="container vh-100 d-flex justify-content-center align-items-center">
 		<div class="sign">
 			<nav class="container">
@@ -52,7 +50,7 @@ if ($step == 1) {
 			</nav>
 			<form class="container sign-up-panel" action="do-Sign-up-Liao.php" method="post">
 				<div class="logo">
-					<img class="object-fit-contain" src="https://cdn.dribbble.com/users/973433/screenshots/5422715/media/41af115b3049cc12fbbf2dfd9c7596ce.jpg?compress=1&resize=1600x1200&vertical=center" alt="">
+					<img class="object-fit-contain" src="https://cdn.dribbble.com/users/17243/screenshots/11643378/media/09c00588d9a7cef3dedd09b528c6de9f.png?compress=1&resize=1600x1200&vertical=center" alt="">
 				</div>
 				<!-- class="bs-stepper" -->
 				<div class="">
@@ -66,55 +64,83 @@ if ($step == 1) {
 						<label for="phone" class="form-label">聯絡電話</label>
 						<input name="phone" type="phone" class="form-control" id="phone" placeholder="0928123456">
 					</div>
+					<div class="form-group mb-2">
+						<label for="">您的居住地</label>
+						<select name="city" class="form-select mt-1" aria-label="Default select example">
+							<option value="1">基隆市</option>
+							<option value="2">台北市</option>
+							<option value="3">新北市</option>
+							<option value="4">桃園市</option>
+							<option value="5">新竹市</option>
+							<option value="6">新竹縣</option>
+							<option value="7">苗栗縣</option>
+							<option value="8" selected>台中市</option>
+							<option value="9">彰化縣</option>
+							<option value="10">南投縣</option>
+							<option value="11">雲林縣</option>
+							<option value="12">嘉義市</option>
+							<option value="13">嘉義縣</option>
+							<option value="14">台南市</option>
+							<option value="15">高雄市</option>
+							<option value="16">屏東縣</option>
+							<option value="17">台東縣</option>
+							<option value="18">花蓮縣</option>
+							<option value="19">宜蘭縣</option>
+							<option value="20">澎湖縣</option>
+							<option value="21">金門縣</option>
+							<option value="22">連江縣</option>
+						</select>
+					</div>
 					<div class="mb-2">
 						<label for="account" class="form-label">信箱（帳號）</label>
 						<input name="account" type="account" class="form-control" id="account" placeholder="example@mail.com">
 					</div>
 					<div class="mb-2">
 						<label for="password" class="form-label">密碼</label>
-						<input name="password" type="password" class="form-control" id="password" placeholder="6-18位數密碼，區分大小寫">
+						<input name="password" type="password" class="form-control" id="password" placeholder="請自行設定密碼">
 					</div>
 					<div class="mb-2">
 						<label for="repassword" class="form-label">再次輸入密碼</label>
-						<input name="repassword" type="password" class="form-control" id="repassword" placeholder="6-18位數密碼，區分大小寫">
+						<input name="repassword" type="password" class="form-control" id="repassword" placeholder="請輸入與上面相同的密碼">
 					</div>
+					<?php if (isset($_SESSION["error"])) : ?>
+						<div class="text-danger">
+							<?= $_SESSION["error"]["again"] ?>
+						</div>
+					<?php unset($_SESSION["error"]);
+					endif; ?>
 
-					<!-- <div class="form-group mb-2">
-								<label for="">您的居住地</label>
-								<select name="city" class="form-select mt-1" aria-label="Default select example">
-									<option value="1">基隆市</option>
-									<option value="2">台北市</option>
-									<option value="3">新北市</option>
-									<option value="4">桃園市</option>
-									<option value="5">新竹市</option>
-									<option value="6">新竹縣</option>
-									<option value="7">苗栗縣</option>
-									<option value="8" selected>台中市</option>
-									<option value="9">彰化縣</option>
-									<option value="10">南投縣</option>
-									<option value="11">雲林縣</option>
-									<option value="12">嘉義市</option>
-									<option value="13">嘉義縣</option>
-									<option value="14">台南市</option>
-									<option value="15">高雄市</option>
-									<option value="16">屏東縣</option>
-									<option value="17">台東縣</option>
-									<option value="18">花蓮縣</option>
-									<option value="19">宜蘭縣</option>
-									<option value="20">澎湖縣</option>
-									<option value="21">金門縣</option>
-									<option value="22">連江縣</option>
-								</select>
-							</div> -->
-					
-					<!-- <div class="text-danger">錯誤資料提示文字放在這邊</div> -->
-					<div class="d-flex justify-content-end">
+					<div class="d-flex justify-content-center">
 
 						<button class="btn btn-dark mt-3" type="submit">註冊</button>
 					</div>
 
 				</div>
 		</div>
+
+
+		<!-- 已經被註冊過的提示訊息 -->
+
+		<!-- <?php var_dump($_SESSION["error"]); ?> -->
+		<!-- <?php if (isset($_SESSION["error"])) : ?>
+			<div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">小提醒</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							這個帳號已經被註冊過囉！
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">重新設定</button>
+							<a href="member-signIn-Liao.php" type="button" class="btn btn-primary">立即登入</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?> -->
 		</form>
 	</div>
 	</div>

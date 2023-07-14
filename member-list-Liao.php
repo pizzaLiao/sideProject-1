@@ -29,7 +29,8 @@ if($type==1){
     $ORDERBY="ORDER BY user_name DESC";
 }
 
-$sqlPage="SELECT * FROM member_list WHERE valid=1 $ORDERBY LIMIT $startPage,$perPage";
+$sqlPage="SELECT member_list.* , member_city.city_name AS city_name FROM member_list 
+JOIN member_city ON city_id = user_city WHERE valid=1 $ORDERBY LIMIT $startPage,$perPage";
 $result=$conn->query($sqlPage);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -101,7 +102,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                         <td><?= $member["user_name"] ?></td>
                         <td><?= $member["user_email"] ?></td>
                         <td><?= $member["user_phone"] ?></td>
-                        <td><?= $member["user_city"] ?></td>
+                        <td><?= $member["city_name"] ?></td>
                         <td><a class="btn btn-primary" href="member-detail-Liao.php?id=<?= $member["user_id"] ?>">顯示</a></td>
 
                     </tr>

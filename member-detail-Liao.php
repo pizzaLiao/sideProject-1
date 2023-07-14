@@ -3,7 +3,9 @@
 
 $id = $_GET["id"];
 require_once("../db-connect.php");
-$sql = "SELECT * FROM member_list WHERE user_id=$id AND valid=1";
+$sql = "SELECT member_list.* , member_city.city_name AS city_name FROM member_list 
+JOIN member_city ON city_id = user_city
+WHERE user_id=$id AND valid=1";
 $result = $conn->query($sql);
 $member = $result->fetch_assoc();
 
@@ -73,7 +75,7 @@ $member = $result->fetch_assoc();
             </tr>
             <tr>
                 <th>居住城市</th>
-                <td><?= $member["user_city"] ?></td>
+                <td><?= $member["city_name"] ?></td>
             </tr>
             <tr>
                 <th>創建時間</th>
