@@ -109,7 +109,6 @@ session_start();
 						</div>
 					<?php unset($_SESSION["error"]);
 					endif; ?>
-
 					<div class="d-flex justify-content-center">
 
 						<button class="btn btn-dark mt-3" type="submit">註冊</button>

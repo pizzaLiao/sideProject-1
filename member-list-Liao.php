@@ -18,6 +18,7 @@ $totalPage=ceil($totalMember/$perPage);
 $startPage = ($page - 1) * $perPage;
 //limit前面一個數字為開始的筆數，後面的為抓取筆數
 
+
 //排序id,name
 if($type==1){
     $ORDERBY="ORDER BY user_id ASC";
@@ -71,12 +72,12 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <!-- 搜尋按鈕 -->
             <div class="search-btn">
                 <div class="btn-group me-2">
-                    <a href="member-list-Liao.php?page=<?= $page ?>&type=1" class="btn btn-light"><i class="fa-solid fa-arrow-down"></i> id</a>
-                    <a href="member-list-Liao.php?page=<?= $page ?>&type=2" class="btn btn-light"><i class="fa-solid fa-arrow-up"></i> id</a>
+                    <a href="member-list-Liao.php?page=<?= $page ?>&type=1" class="btn btn-light <?php if ($type == 1) echo "active"; ?>"><i class="fa-solid fa-arrow-down"></i> id</a>
+                    <a href="member-list-Liao.php?page=<?= $page ?>&type=2" class="btn btn-light <?php if ($type == 2) echo "active"; ?>"><i class="fa-solid fa-arrow-up"></i> id</a>
                 </div>
                 <div class="btn-group">
-                    <a href="member-list-Liao.php?page=<?= $page ?>&type=3" class="btn btn-light"><i class="fa-solid fa-arrow-down"></i> name</a>
-                    <a href="member-list-Liao.php?page=<?= $page ?>&type=4" class="btn btn-light"><i class="fa-solid fa-arrow-up"></i> name</a>
+                    <a href="member-list-Liao.php?page=<?= $page ?>&type=3" class="btn btn-light <?php if ($type == 3) echo "active"; ?>"><i class="fa-solid fa-arrow-down"></i> name</a>
+                    <a href="member-list-Liao.php?page=<?= $page ?>&type=4" class="btn btn-light <?php if ($type == 4) echo "active"; ?>"><i class="fa-solid fa-arrow-up"></i> name</a>
                 </div>
             </div>
 
